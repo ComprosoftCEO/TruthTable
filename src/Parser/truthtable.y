@@ -25,40 +25,39 @@
 %union {
 	TruthStatement* stmt;	// Statement
 	std::string* str;		// Identifier name
-	UnaryOperator  uop;		// Unary operator
-	BinaryOperator bop;		// Binary operator
+	UnaryOperator uop;		// Unary operator
+	BinaryOperator bop;		// Binary Operator
 }
 
 %destructor {delete($$);} <str> <stmt>
 
 //Terminal Types
 %token <str> IDENTIFIER
-%left IMPLIES IFF
-%left AND OR
-%right NOT
+%left  <bop> IMPLIES IFF
+%left  <bop> AND OR
+%right <uop> NOT
 
 //Nonterminal Types
 %type <stmt> statement
-%type <uop> unary_operator
-%type <bop> binary_operator
+%type <stmt> unary_statement binary_statement
 
 %%
 
 //Top level function
 statement
 	:	IDENTIFIER							{$$ = new IdentifierStatement(*$1); delete($1);}
-	|	unary_operator statement			{$$ = new UnaryStatement($1,$2);}
-	| 	statement binary_operator statement	{$$ = new BinaryStatement($1,$2,$3);}
+	|	unary_statement						{$$ = $1;}
+	|	binary_statement					{$$ = $1;}
 	|	'(' statement ')'					{$$ = $2;}
 
-unary_operator
-	:	NOT			{$$ = UnaryOperator::NOT;}
+unary_statement
+	:	NOT	statement	{$$ = new UnaryStatement($1,$2);}
 
-binary_operator
-	:	AND			{$$ = BinaryOperator::AND;}
-	|	OR			{$$ = BinaryOperator::OR;}
-	|	IMPLIES		{$$ = BinaryOperator::IMPLIES;}
-	|	IFF			{$$ = BinaryOperator::IFF;}
+binary_statement
+	:	statement AND statement			{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement OR  statement			{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement IMPLIES statement		{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement IFF statement			{$$ = new BinaryStatement($1,$2,$3);}
 
 
 %%
