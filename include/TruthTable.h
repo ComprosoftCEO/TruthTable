@@ -1,40 +1,10 @@
+//Main classes for the TruthTable
+#ifndef TRUTH_TABLE_HEADER
+#define TRUTH_TABLE_HEADER
 
-#include <string>
-
-enum class UnaryOperator {
-	NOT
-};
-
-enum class BinaryOperator {
-	AND,
-	OR,
-	IMPLIES,
-	IFF,
-	EQUAL,
-	NOT_EQUAL,
-};
+#include <IdentifierStatement.h>
+#include <UnaryStatement.h>
+#include <BinaryStatement.h>
 
 
-class TruthStatement {
-	
-};
-
-
-class IdentifierStatement: public TruthStatement {
-
-public:
-	IdentifierStatement(const std::string& name);
-};
-
-
-class UnaryStatement: public TruthStatement {
-
-public:
-	UnaryStatement(UnaryOperator op, TruthStatement* stmt);
-};
-
-class BinaryStatement: public TruthStatement {
-
-public:
-	BinaryStatement(TruthStatement* left, BinaryOperator op, TruthStatement* right);
-};
+#endif	/* Truth Table Header Included */

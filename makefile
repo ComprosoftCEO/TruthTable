@@ -5,8 +5,12 @@ CFLAGS=-std=c++11 -Iinclude
 PROGRAM=TruthTable.out
 
 OBJECTS = \
+	TruthTable.o \
 	Parser/truthtable.tab.o \
-	Parser/truthtable.yy.o
+	Parser/truthtable.yy.o \
+	Statement/IdentifierStatement.o \
+	Statement/UnaryStatement.o \
+	Statement/BinaryStatement.o
 
 
 # Add the source directory
