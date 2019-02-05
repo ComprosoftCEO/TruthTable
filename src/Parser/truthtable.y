@@ -33,6 +33,7 @@
 
 //Terminal Types
 %token <str> IDENTIFIER
+%left  <bop> EQUAL NOT_EQUAL
 %left  <bop> IMPLIES IFF
 %left  <bop> AND OR
 %right <uop> NOT

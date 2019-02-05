@@ -9,12 +9,14 @@ enum class BinaryOperator {
 	AND,
 	OR,
 	IMPLIES,
-	IFF
+	IFF,
+	EQUAL,
+	NOT_EQUAL,
 };
 
 
 class TruthStatement {
-
+	
 };
 
 
