@@ -9,7 +9,7 @@ using std::string;
 //
 IdentifierStatement::IdentifierStatement(const std::string& name):
   name(name),
-  current(true) {}
+  table(nullptr) {}
 
 
 
@@ -25,8 +25,9 @@ const std::string& IdentifierStatement::getName() const {
 //
 // Build table for an Identifier statement
 //
-void IdentifierStatement::build_table(TruthTable& table) const {
-	table.add_identifier(this->name, (bool*) &this->current);
+void IdentifierStatement::build_table(TruthTable& table) {
+	table.add_identifier(this->name);
+	this->table = &table;
 }
 
 
@@ -35,7 +36,8 @@ void IdentifierStatement::build_table(TruthTable& table) const {
 // Evaluate the statement
 //
 bool IdentifierStatement::evaluate_statement() const {
-	return this->current;
+	if (!table) {return false;	/* Should NOT happen */}
+	return this->table->get_identifier_value(this->name);
 }
 
 

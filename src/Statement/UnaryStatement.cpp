@@ -23,7 +23,7 @@ UnaryStatement::~UnaryStatement() {
 //
 // Build table for Unary statement
 //
-void UnaryStatement::build_table(TruthTable& table) const {
+void UnaryStatement::build_table(TruthTable& table) {
 	this->stmt->build_table(table);
 	table.add_column(this);
 }

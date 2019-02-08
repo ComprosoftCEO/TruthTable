@@ -11,7 +11,7 @@ class TruthStatement {
 public:
 	virtual ~TruthStatement() = default;
 
-	virtual void build_table(TruthTable& table) const = 0;
+	virtual void build_table(TruthTable& table) = 0;
 	virtual bool evaluate_statement() const = 0;
 	virtual std::string to_string() const = 0;
 };

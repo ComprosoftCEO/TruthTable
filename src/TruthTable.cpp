@@ -25,12 +25,12 @@ TruthTable::TruthTable(const string& true_str, const string& false_str):
 //
 // Add an identifier to the list
 //
-void TruthTable::add_identifier(const string& identifier, bool* value) {
+void TruthTable::add_identifier(const string& identifier) {
 	this->all_identifiers.insert(identifier);
 	this->identifier_width[identifier] = max(
 		{true_str.length(), false_str.length(), identifier.length()}
 	);
-	this->identifier_value[identifier] = value;
+	this->identifier_value[identifier] = true;
 }
 
 
@@ -47,11 +47,19 @@ void TruthTable::add_column(const TruthStatement* statement) {
 
 
 
+//
+// Get the value of an identifier
+//
+bool TruthTable::get_identifier_value(const string& identifier) const {
+	return this->identifier_value.find(identifier)->second;
+}
+
+
 
 //
 // Print out the entire table
 //
-void TruthTable::print_table() const {
+void TruthTable::print_table() {
 
 	this->print_header();
 	do {
@@ -97,8 +105,8 @@ void TruthTable::print_single_row() const {
 	//Print out variables
 	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
 		int width = this->identifier_width.find(*identifier)->second;
-		bool* value = this->identifier_value.find(*identifier)->second;
-		printf("%*s|",width,this->get_truth_string(*value));
+		bool value = this->identifier_value.find(*identifier)->second;
+		printf("%*s|",width,this->get_truth_string(value));
 	}
 
 	printf("|");
@@ -127,13 +135,13 @@ const char* TruthTable::get_truth_string(bool value) const {
 //
 // Compute the next row of values
 //
-bool TruthTable::compute_next_row() const {
+bool TruthTable::compute_next_row() {
 
 	for (auto identifier = this->all_identifiers.rbegin(); identifier != this->all_identifiers.rend(); ++identifier) {
-		bool* value = this->identifier_value.find(*identifier)->second;
+		bool& value = this->identifier_value[*identifier];
 
-		if (*value) {*value = false; return true;}
-		else {*value = true;}
+		if (value) {value = false; return true;}
+		else {value = true;}
 	}
 
 	return false;
