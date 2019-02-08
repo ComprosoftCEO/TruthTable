@@ -24,7 +24,7 @@ BinaryStatement::~BinaryStatement() {
 
 
 //
-// Binary build Statement
+// Build Binary Statement
 //
 void BinaryStatement::build_statement(TruthTable& table) const {
 	this->left->build_statement(table);
@@ -42,5 +42,5 @@ string BinaryStatement::to_string() const {
 	string right = this->right->to_string();
 	string op = operator_symbol(this->op);
 
-	return " "+ left + op + right + " ";
+	return "("+ left + op + right + ")";
 }

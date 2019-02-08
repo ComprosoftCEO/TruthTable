@@ -9,7 +9,10 @@
 	#include <cstdio>
 	#include <cstdlib>
 	#include <string>
-	#include <TruthTable.h>
+
+	#include <IdentifierStatement.h>
+	#include <UnaryStatement.h>
+	#include <BinaryStatement.h>
 }
 
 %code requires {

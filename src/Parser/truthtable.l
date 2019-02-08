@@ -1,5 +1,8 @@
 %{
-	#include <TruthTable.h>
+	#include <IdentifierStatement.h>
+	#include <UnaryStatement.h>
+	#include <BinaryStatement.h>
+
 	#include "truthtable.tab.h"
 
 	//Track line numbers for parsed tokens
