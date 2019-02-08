@@ -24,9 +24,9 @@
 %%
 
 [a-zA-Z][a-zA-Z0-9]*		{yylval->str = new std::string(yytext); 	return IDENTIFIER;}
-~							{yylval->uop = UnaryOperator::NOT;			return NOT;}
+[~!]						{yylval->uop = UnaryOperator::NOT;			return NOT;}
 &							{yylval->bop = BinaryOperator::AND;			return AND;}
-[+]							{yylval->bop = BinaryOperator::OR;			return OR;}
+[|+]						{yylval->bop = BinaryOperator::OR;			return OR;}
 ->							{yylval->bop = BinaryOperator::IMPLIES;		return IMPLIES;}
 [<]-[>]						{yylval->bop = BinaryOperator::IFF;			return IFF;}
 =							{yylval->bop = BinaryOperator::EQUAL;		return EQUAL;}
