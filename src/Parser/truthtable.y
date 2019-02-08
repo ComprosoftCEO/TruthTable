@@ -48,13 +48,13 @@
 %%
 
 //Top level function
-code: statement								{statement = $1;}
+code: statement							{statement = $1;}
 
 statement
-	:	IDENTIFIER							{$$ = new IdentifierStatement(*$1); delete($1);}
-	|	unary_statement						{$$ = $1;}
-	|	binary_statement					{$$ = $1;}
-	|	'(' statement ')'					{$$ = $2;}
+	:	IDENTIFIER						{$$ = new IdentifierStatement(*$1); delete($1);}
+	|	unary_statement					{$$ = $1;}
+	|	binary_statement				{$$ = $1;}
+	|	'(' statement ')'				{$$ = $2;}
 
 unary_statement
 	:	NOT	statement	{$$ = new UnaryStatement($1,$2);}
@@ -64,6 +64,8 @@ binary_statement
 	|	statement OR  statement			{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement IMPLIES statement		{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement IFF statement			{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement EQUAL statement		{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement NOT_EQUAL statement	{$$ = new BinaryStatement($1,$2,$3);}
 
 
 %%

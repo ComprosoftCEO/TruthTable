@@ -129,7 +129,7 @@ const char* TruthTable::get_truth_string(bool value) const {
 //
 bool TruthTable::compute_next_row() const {
 
-	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
+	for (auto identifier = this->all_identifiers.rbegin(); identifier != this->all_identifiers.rend(); ++identifier) {
 		bool* value = this->identifier_value.find(*identifier)->second;
 
 		if (*value) {*value = false; return true;}

@@ -1,6 +1,6 @@
 # Makefile for Truth Table Evaluator
 CC=g++
-CFLAGS=-std=c++11 -Iinclude
+CFLAGS=-std=c++11 -Iinclude -Wall
 
 PROGRAM=TruthTable.out
 
