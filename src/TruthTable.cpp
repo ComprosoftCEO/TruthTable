@@ -55,7 +55,7 @@ void TruthTable::print_table() const {
 
 	this->print_header();
 	do {
-		this->print_single_row()
+		this->print_single_row();
 	} while (this->compute_next_row());
 
 }

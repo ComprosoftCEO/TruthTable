@@ -24,11 +24,11 @@ BinaryStatement::~BinaryStatement() {
 
 
 //
-// Build Binary Statement
+// Build table for a binary statement
 //
-void BinaryStatement::build_statement(TruthTable& table) const {
-	this->left->build_statement(table);
-	this->right->build_statement(table);
+void BinaryStatement::build_table(TruthTable& table) const {
+	this->left->build_table(table);
+	this->right->build_table(table);
 	table.add_column(this);
 }
 

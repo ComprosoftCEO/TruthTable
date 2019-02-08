@@ -17,7 +17,7 @@ public:
 	IdentifierStatement(const std::string& name);
 	const std::string& getName() const;
 
-	virtual void build_statement(TruthTable& table) const;
+	virtual void build_table(TruthTable& table) const;
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };

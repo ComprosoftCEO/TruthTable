@@ -3,7 +3,7 @@
 
 %parse-param { yyscan_t scanner } 
 %lex-param {yyscan_t scanner}
-%parse-param {TruthStatement* statement}
+%parse-param {TruthStatement*& statement}
 
 %code top {
 	#include <cstdio>
@@ -22,7 +22,7 @@
 
 %code {
 	int yylex(YYSTYPE* yylvalp, YYLTYPE* yyllocp, yyscan_t scanner);
-	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement* statement, const char* msg);
+	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& statement, const char* msg);
 }
 
 %union {
@@ -48,6 +48,8 @@
 %%
 
 //Top level function
+code: statement								{statement = $1;}
+
 statement
 	:	IDENTIFIER							{$$ = new IdentifierStatement(*$1); delete($1);}
 	|	unary_statement						{$$ = $1;}
@@ -67,7 +69,7 @@ binary_statement
 %%
 
 
-static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement* stmt, const char *msg) {
+static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& stmt, const char *msg) {
 	fprintf(stderr, "%s! [Line %d:%d]\n",
 		msg,yyllocp->first_line, yyllocp->first_column);
 }

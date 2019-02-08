@@ -23,9 +23,9 @@ const std::string& IdentifierStatement::getName() const {
 
 
 //
-// Build Identifier Statement
+// Build table for an Identifier statement
 //
-void IdentifierStatement::build_statement(TruthTable& table) const {
+void IdentifierStatement::build_table(TruthTable& table) const {
 	table.add_identifier(this->name, (bool*) &this->current);
 }
 

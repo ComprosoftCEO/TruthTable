@@ -28,7 +28,7 @@ public:
 	UnaryStatement(UnaryOperator op, TruthStatement* stmt);
 	virtual ~UnaryStatement();
 
-	virtual void build_statement(TruthTable& table) const;
+	virtual void build_table(TruthTable& table) const;
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };
