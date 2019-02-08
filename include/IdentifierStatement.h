@@ -11,6 +11,7 @@ class IdentifierStatement: public TruthStatement {
 
 private:
 	std::string name;
+	bool current;
 
 public:
 	IdentifierStatement(const std::string& name);

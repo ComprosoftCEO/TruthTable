@@ -7,8 +7,8 @@ using std::string;
 // Constructor
 //
 UnaryStatement::UnaryStatement(UnaryOperator op, TruthStatement* stmt):
-	stmt(stmt),
-	op(op) {}
+  stmt(stmt),
+  op(op) {}
 
 
 //

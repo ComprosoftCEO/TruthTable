@@ -5,9 +5,10 @@ CFLAGS=-std=c++11 -Iinclude
 PROGRAM=TruthTable.out
 
 OBJECTS = \
-	TruthTable.o \
 	Parser/truthtable.tab.o \
 	Parser/truthtable.yy.o \
+	Main.o \
+	TruthTable.o \
 	Statement/IdentifierStatement.o \
 	Statement/UnaryOperator.o \
 	Statement/UnaryStatement.o \

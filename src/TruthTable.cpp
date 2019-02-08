@@ -25,11 +25,12 @@ TruthTable::TruthTable(const string& true_str, const string& false_str):
 //
 // Add an identifier to the list
 //
-void TruthTable::add_identifier(const string& identifier) {
+void TruthTable::add_identifier(const string& identifier, bool* value) {
 	this->all_identifiers.insert(identifier);
 	this->identifier_width[identifier] = max(
 		{true_str.length(), false_str.length(), identifier.length()}
 	);
+	this->identifier_value[identifier] = value;
 }
 
 
@@ -53,6 +54,9 @@ void TruthTable::add_column(const TruthStatement* statement) {
 void TruthTable::print_table() const {
 
 	this->print_header();
+	do {
+		this->print_single_row()
+	} while (this->compute_next_row());
 
 }
 
@@ -71,6 +75,8 @@ void TruthTable::print_header() const {
 		printf("%*s|",width,identifier->c_str());
 	}
 
+	printf("|");
+
 	//Print out expressions
 	for (auto column = this->all_columns.begin(); column != this->all_columns.end(); ++column) {
 		int width = this->column_width.find(*column)->second;
@@ -78,4 +84,57 @@ void TruthTable::print_header() const {
 	}
 
 	printf("\n");
+}
+
+
+
+//
+// Print a single expression row
+//
+void TruthTable::print_single_row() const {
+	printf("|");
+
+	//Print out variables
+	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
+		int width = this->identifier_width.find(*identifier)->second;
+		bool* value = this->identifier_value.find(*identifier)->second;
+		printf("%*s|",width,this->get_truth_string(*value));
+	}
+
+	printf("|");
+
+	//Print out expressions
+	for (auto column = this->all_columns.begin(); column != this->all_columns.end(); ++column) {
+		int width = this->column_width.find(*column)->second;
+		bool value = (*column)->evaluate_statement();
+		printf("%*s|",width,this->get_truth_string(value));
+	}
+
+	printf("\n");
+}
+
+
+
+//
+// Get the string associated with a truth value
+//
+const char* TruthTable::get_truth_string(bool value) const {
+	return value ? this->true_str.c_str() : this->false_str.c_str();
+}
+
+
+
+//
+// Compute the next row of values
+//
+bool TruthTable::compute_next_row() const {
+
+	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
+		bool* value = this->identifier_value.find(*identifier)->second;
+
+		if (*value) {*value = false; return true;}
+		else {*value = true;}
+	}
+
+	return false;
 }

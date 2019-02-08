@@ -7,9 +7,9 @@ using std::string;
 // Constructor
 //
 BinaryStatement::BinaryStatement(TruthStatement* left, BinaryOperator op, TruthStatement* right):
-	left(left),
-	right(right),
-	op(op) {}
+  left(left),
+  right(right),
+  op(op) {}
 
 
 
