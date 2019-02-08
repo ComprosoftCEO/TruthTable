@@ -16,6 +16,11 @@ enum class BinaryOperator {
 };
 
 
+const std::string& operator_symbol(BinaryOperator op);
+bool evaluate_operator(BinaryOperator op, bool left, bool right);
+
+
+
 class BinaryStatement: public TruthStatement {
 
 private:
@@ -27,6 +32,8 @@ public:
 	BinaryStatement(TruthStatement* left, BinaryOperator op, TruthStatement* right);
 	virtual ~BinaryStatement();
 
+	virtual void build_statement(TruthTable& table) const;
+	virtual std::string to_string() const;
 };
 
 

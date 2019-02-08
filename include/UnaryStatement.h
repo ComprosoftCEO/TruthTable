@@ -23,6 +23,9 @@ private:
 public:
 	UnaryStatement(UnaryOperator op, TruthStatement* stmt);
 	virtual ~UnaryStatement();
+
+	virtual void build_statement(TruthTable& table) const;
+	virtual std::string to_string() const;
 };
 
 

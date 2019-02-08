@@ -10,6 +10,7 @@ OBJECTS = \
 	Parser/truthtable.yy.o \
 	Statement/IdentifierStatement.o \
 	Statement/UnaryStatement.o \
+	Statement/BinaryOperator.o \
 	Statement/BinaryStatement.o
 
 
