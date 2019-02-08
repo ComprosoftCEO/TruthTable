@@ -12,6 +12,10 @@ enum class UnaryOperator {
 	NOT
 };
 
+const std::string& operator_symbol(UnaryOperator op);
+bool evaluate_operator(UnaryOperator op, bool input);
+
+
 
 
 class UnaryStatement: public TruthStatement {

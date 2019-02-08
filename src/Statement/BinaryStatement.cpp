@@ -1,6 +1,6 @@
 //Represents a two-part statement (like A or B)
 #include <BinaryStatement.h>
-
+using std::string;
 
 
 //
@@ -36,12 +36,11 @@ void BinaryStatement::build_statement(TruthTable& table) const {
 //
 // Convert to string
 //
+string BinaryStatement::to_string() const {
 
+	string left = this->left->to_string();
+	string right = this->right->to_string();
+	string op = operator_symbol(this->op);
 
-
-
-
-
-//
-// Get an operator symbol
-//
+	return " "+ left + op + right + " ";
+}
