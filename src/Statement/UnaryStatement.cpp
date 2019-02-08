@@ -30,6 +30,15 @@ void UnaryStatement::build_statement(TruthTable& table) const {
 
 
 //
+// Evaluate the statement
+//
+bool UnaryStatement::evaluate_statement() const {
+	bool value = this->stmt->evaluate_statement();
+	return evaluate_operator(this->op,value);
+}
+
+
+//
 // Convert to string
 //
 string UnaryStatement::to_string() const {

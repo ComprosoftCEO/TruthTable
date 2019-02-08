@@ -29,6 +29,15 @@ void IdentifierStatement::build_statement(TruthTable& table) const {
 }
 
 
+
+//
+// Evaluate the statement
+//
+bool IdentifierStatement::evaluate_statement() const {
+	return true;	//TODO: Make this work
+}
+
+
 //
 // Convert to string
 //

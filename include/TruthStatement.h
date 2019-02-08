@@ -12,8 +12,8 @@ public:
 	virtual ~TruthStatement() = default;
 
 	virtual void build_statement(TruthTable& table) const = 0;
-	virtual bool evaluate_statement() const;
-	virtual std::string to_string() const;
+	virtual bool evaluate_statement() const = 0;
+	virtual std::string to_string() const = 0;
 };
 
 

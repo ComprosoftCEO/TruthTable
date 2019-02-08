@@ -34,6 +34,16 @@ void BinaryStatement::build_statement(TruthTable& table) const {
 
 
 //
+// Evaluate the statement
+//
+bool BinaryStatement::evaluate_statement() const {
+	bool left = this->left->evaluate_statement();
+	bool right = this->right->evaluate_statement();
+	return evaluate_operator(this->op,left,right);
+}
+
+
+//
 // Convert to string
 //
 string BinaryStatement::to_string() const {
