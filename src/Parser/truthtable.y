@@ -11,6 +11,7 @@
 	#include <string>
 
 	#include <IdentifierStatement.h>
+	#include <LiteralStatement.h>
 	#include <UnaryStatement.h>
 	#include <BinaryStatement.h>
 }
@@ -30,12 +31,14 @@
 	std::string* str;		// Identifier name
 	UnaryOperator uop;		// Unary operator
 	BinaryOperator bop;		// Binary Operator
+	bool val;				// Boolean value
 }
 
 %destructor {delete($$);} <str> <stmt>
 
 //Terminal Types
 %token <str> IDENTIFIER
+%token <val> LITERAL
 %left  <bop> EQUAL NOT_EQUAL
 %left  <bop> IMPLIES IFF
 %left  <bop> AND OR XOR
@@ -52,6 +55,7 @@ code: statement							{statement = $1;}
 
 statement
 	:	IDENTIFIER						{$$ = new IdentifierStatement(*$1); delete($1);}
+	|	LITERAL							{$$ = new LiteralStatement($1);}
 	|	unary_statement					{$$ = $1;}
 	|	binary_statement				{$$ = $1;}
 	|	'(' statement ')'				{$$ = $2;}

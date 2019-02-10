@@ -23,6 +23,9 @@
 %option reentrant bison-bridge bison-locations 
 %%
 
+([Tt][Rr][Uu][Ee]|T|1)		{yylval->val = true;  return LITERAL;}
+([Ff][Aa][Ll][Ss][Ee]|F|0)	{yylval->val = false; return LITERAL;}
+
 [a-zA-Z][a-zA-Z0-9]*		{yylval->str = new std::string(yytext); 	return IDENTIFIER;}
 [~!]						{yylval->uop = UnaryOperator::NOT;			return NOT;}
 &							{yylval->bop = BinaryOperator::AND;			return AND;}

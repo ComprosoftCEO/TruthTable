@@ -10,6 +10,7 @@ OBJECTS = \
 	Main.o \
 	TruthTable.o \
 	Statement/IdentifierStatement.o \
+	Statement/LiteralStatement.o \
 	Statement/UnaryOperator.o \
 	Statement/UnaryStatement.o \
 	Statement/BinaryOperator.o \

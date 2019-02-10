@@ -40,13 +40,13 @@ public:
 
 	void print_table();
 
+	const char* get_truth_string(bool value) const;
+
 
 private:
 	void print_header() const;
 	void print_single_row() const;
 	bool compute_next_row();
-
-	const char* get_truth_string(bool value) const;
 };
 
 

@@ -22,17 +22,26 @@ TruthTable \<Expression\>
 <br/>
 
 ## Expression
-An expression is a series of identifiers connected by operators and parenthesis. For example:
+An expression is a series of identifiers or literals connected by operators and parenthesis. For example:
 ```
-(a&b)->(b|~c)<->(c!=b)
+(a&b)->(b|~c)<->(b!=T)
 ```
-Identifiers all start with a letter, followed by 0 or more alphanumeric characters. Unary
-operators go before an identifier, and binary operators go between an identifier (infix notation).
+Identifiers all start with a letter, followed by 0 or more alphanumeric characters. Literals are either
+`T` or `F` (or any of the variabions listed below). Unary operators go before an identifier, and binary
+operators go between an identifier (infix notation).
+
+### Literal Values
+| Value | Symbols |
+|:----- |:------- |
+| True  | True, T, or 1 |
+| False | False, F, or 1|
+
+_Note:_ `True` and `False` can be in any case, so `TrUe`, `TRue`, and `TRUE` are all valid.
 
 ### All Supported Operators
 
 | Operation | Symbol |  Type  |
-|:---------:|:------:|:------:|
+|:--------- |:------ |:------:|
 | Not       | ~      | Unary  |
 | Or        | + or \|| Binary |
 | And       | \&     | Binary |
