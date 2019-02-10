@@ -59,6 +59,7 @@ statement
 	|	unary_statement					{$$ = $1;}
 	|	binary_statement				{$$ = $1;}
 	|	'(' statement ')'				{$$ = $2;}
+	|	'[' statement ']'				{$$ = $2;}
 
 unary_statement
 	:	NOT	statement	{$$ = new UnaryStatement($1,$2);}

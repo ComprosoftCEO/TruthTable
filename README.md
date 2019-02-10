@@ -24,7 +24,7 @@ TruthTable \<Expression\>
 ## Expression
 An expression is a series of identifiers or literals connected by operators and parenthesis. For example:
 ```
-(a&b)->(b|~c)<->(b!=T)
+[(a&b)->(b|~c)]<->(b!=T)
 ```
 Identifiers all start with a letter, followed by 0 or more alphanumeric characters. Literals are either
 `T` or `F` (or any of the variabions listed below). Unary operators go before an identifier, and binary
