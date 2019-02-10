@@ -38,7 +38,7 @@
 %token <str> IDENTIFIER
 %left  <bop> EQUAL NOT_EQUAL
 %left  <bop> IMPLIES IFF
-%left  <bop> AND OR
+%left  <bop> AND OR XOR
 %right <uop> NOT
 
 //Nonterminal Types
@@ -62,6 +62,7 @@ unary_statement
 binary_statement
 	:	statement AND statement			{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement OR  statement			{$$ = new BinaryStatement($1,$2,$3);}
+	|	statement XOR statement			{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement IMPLIES statement		{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement IFF statement			{$$ = new BinaryStatement($1,$2,$3);}
 	|	statement EQUAL statement		{$$ = new BinaryStatement($1,$2,$3);}

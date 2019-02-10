@@ -36,6 +36,7 @@ operators go before an identifier, and binary operators go between an identifier
 | Not       | ~      | Unary  |
 | Or        | + or \|| Binary |
 | And       | \&     | Binary |
+| Exclusive Or | \^  | Binary |
 | Implies   | -\>    | Binary |
 | If and Only If | \<-\> | Binary |
 | Equals    | =      | Binary |

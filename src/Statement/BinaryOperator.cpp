@@ -18,6 +18,7 @@ struct OperatorData {
 static const map<BinaryOperator,OperatorData> OPERATOR_DATA = {
 	{BinaryOperator::AND,		{"&",   [](bool left, bool right) -> bool {return left && right;}}},
 	{BinaryOperator::OR,		{"|",   [](bool left, bool right) -> bool {return left || right;}}},
+	{BinaryOperator::XOR,		{"^",   [](bool left, bool right) -> bool {return left != right;}}},
 	{BinaryOperator::IMPLIES,	{"->",  [](bool left, bool right) -> bool {return (!left) || right;}}},
 	{BinaryOperator::IFF,		{"<->", [](bool left, bool right) -> bool {return left == right;}}},
 	{BinaryOperator::EQUAL, 	{"=",   [](bool left, bool right) -> bool {return left == right;}}},

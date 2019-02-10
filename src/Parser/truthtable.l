@@ -27,6 +27,7 @@
 [~!]						{yylval->uop = UnaryOperator::NOT;			return NOT;}
 &							{yylval->bop = BinaryOperator::AND;			return AND;}
 [|+]						{yylval->bop = BinaryOperator::OR;			return OR;}
+[\^]						{yylval->bop = BinaryOperator::XOR;			return XOR;}
 ->							{yylval->bop = BinaryOperator::IMPLIES;		return IMPLIES;}
 [<]-[>]						{yylval->bop = BinaryOperator::IFF;			return IFF;}
 =							{yylval->bop = BinaryOperator::EQUAL;		return EQUAL;}

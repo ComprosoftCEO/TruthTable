@@ -9,6 +9,7 @@
 enum class BinaryOperator {
 	AND,
 	OR,
+	XOR,
 	IMPLIES,
 	IFF,
 	EQUAL,
