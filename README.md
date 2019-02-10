@@ -27,7 +27,7 @@ An expression is a series of identifiers or literals connected by operators and 
 [(a&b)->(b|~c)]<->(b!=T)
 ```
 Identifiers all start with a letter, followed by 0 or more alphanumeric characters. Literals are either
-`T` or `F` (or any of the variabions listed below). Unary operators go before an identifier, and binary
+`T` or `F` (or any of the variations listed below). Unary operators go before an identifier, and binary
 operators go between an identifier (infix notation).
 
 ### Literal Values
@@ -36,7 +36,7 @@ operators go between an identifier (infix notation).
 | True  | True, T, or 1 |
 | False | False, F, or 1|
 
-_Note:_ `True` and `False` can be in any case, so `TrUe`, `TRue`, and `TRUE` are all valid.
+_Note:`True` and `False` can be in any case, so `TrUe`, `TRue`, and `TRUE` are all valid._
 
 ### All Supported Operators
 
