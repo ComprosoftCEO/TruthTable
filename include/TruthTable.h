@@ -45,8 +45,12 @@ public:
 
 private:
 	void print_header() const;
+	void print_border() const;
 	void print_single_row() const;
+
 	static void print_centered(const std::string& to_print, size_t width);
+	static void print_horizontal_line(size_t length);
+
 	bool compute_next_row();
 };
 

@@ -71,6 +71,8 @@ const std::string& TruthTable::get_truth_string(bool value) const {
 void TruthTable::print_table() {
 
 	this->print_header();
+	this->print_border();
+
 	do {
 		this->print_single_row();
 	} while (this->compute_next_row());
@@ -104,6 +106,35 @@ void TruthTable::print_header() const {
 
 	printf("\n");
 }
+
+
+
+//
+// Print the single-line border between the top and True/False values
+//
+void TruthTable::print_border() const {
+
+	printf("|");
+
+	//Print out variables
+	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
+		size_t width = this->identifier_width.find(*identifier)->second;
+		print_horizontal_line(width);
+		printf("|");
+	}
+
+	printf("|");
+
+	//Print out expressions
+	for (auto column = this->all_columns.begin(); column != this->all_columns.end(); ++column) {
+		size_t width = this->column_width.find(*column)->second;
+		print_horizontal_line(width);
+		printf("|");
+	}
+
+	printf("\n");
+}
+
 
 
 
@@ -155,6 +186,17 @@ void TruthTable::print_centered(const std::string& to_print, size_t width) {
 		(int) right_margin, ""
 	);
 
+}
+
+
+
+//
+// Print a line of dashes
+//
+void TruthTable::print_horizontal_line(size_t width) {
+	for (size_t i = 0; i < width; ++i) {
+		printf("-");
+	}
 }
 
 
