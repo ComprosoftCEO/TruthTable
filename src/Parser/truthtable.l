@@ -31,5 +31,8 @@
 [<]-[>]						{yylval->bop = BinaryOperator::IFF;			return IFF;}
 =							{yylval->bop = BinaryOperator::EQUAL;		return EQUAL;}
 !=							{yylval->bop = BinaryOperator::NOT_EQUAL;	return NOT_EQUAL;}
-.							{return yytext[0];}
-\n							/* Ignore new lines */
+
+[][()\{\}:.;<>'"_^|$~+\-&`@%=*/\\!?#,]		{return yytext[0];}
+
+.			/* Ignore spaces */
+\n			/* Ignore new lines */
