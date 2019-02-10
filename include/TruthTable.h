@@ -20,12 +20,12 @@ private:
 
 	//List of identifiers and how many spaces wide to make them
 	std::set<std::string> all_identifiers;
-	std::map<std::string,int> identifier_width;
+	std::map<std::string,size_t> identifier_width;
 	std::map<std::string,bool> identifier_value;
 
 	//List of expressions and how many spaces wide to make them
 	std::vector<const TruthStatement*> all_columns;
-	std::map<const TruthStatement*,int> column_width;
+	std::map<const TruthStatement*,size_t> column_width;
 
 
 public:
@@ -37,15 +37,16 @@ public:
 	void add_column(const TruthStatement* statement);
 
 	bool get_identifier_value(const std::string& identifier) const;
+	const std::string& get_truth_string(bool value) const;
+
 
 	void print_table();
-
-	const char* get_truth_string(bool value) const;
 
 
 private:
 	void print_header() const;
 	void print_single_row() const;
+	static void print_centered(const std::string& to_print, size_t width);
 	bool compute_next_row();
 };
 

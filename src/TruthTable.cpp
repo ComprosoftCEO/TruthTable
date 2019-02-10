@@ -55,6 +55,15 @@ bool TruthTable::get_identifier_value(const string& identifier) const {
 }
 
 
+//
+// Get the string associated with a truth value
+//
+const std::string& TruthTable::get_truth_string(bool value) const {
+	return value ? this->true_str : this->false_str;
+}
+
+
+
 
 //
 // Print out the entire table
@@ -79,16 +88,18 @@ void TruthTable::print_header() const {
 
 	//Print out variables
 	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
-		int width = this->identifier_width.find(*identifier)->second;
-		printf("%*s|",width,identifier->c_str());
+		size_t width = this->identifier_width.find(*identifier)->second;
+		print_centered(*identifier,width);
+		printf("|");
 	}
 
 	printf("|");
 
 	//Print out expressions
 	for (auto column = this->all_columns.begin(); column != this->all_columns.end(); ++column) {
-		int width = this->column_width.find(*column)->second;
-		printf("%*s|",width,(*column)->to_string().c_str());
+		size_t width = this->column_width.find(*column)->second;
+		print_centered((*column)->to_string(),width);
+		printf("|");
 	}
 
 	printf("\n");
@@ -104,18 +115,22 @@ void TruthTable::print_single_row() const {
 
 	//Print out variables
 	for (auto identifier = this->all_identifiers.begin(); identifier != this->all_identifiers.end(); ++identifier) {
-		int width = this->identifier_width.find(*identifier)->second;
+		size_t width = this->identifier_width.find(*identifier)->second;
 		bool value = this->identifier_value.find(*identifier)->second;
-		printf("%*s|",width,this->get_truth_string(value));
+
+		print_centered(this->get_truth_string(value), width);
+		printf("|");
 	}
 
 	printf("|");
 
 	//Print out expressions
 	for (auto column = this->all_columns.begin(); column != this->all_columns.end(); ++column) {
-		int width = this->column_width.find(*column)->second;
+		size_t width = this->column_width.find(*column)->second;
 		bool value = (*column)->evaluate_statement();
-		printf("%*s|",width,this->get_truth_string(value));
+
+		print_centered(this->get_truth_string(value), width);
+		printf("|");
 	}
 
 	printf("\n");
@@ -123,11 +138,23 @@ void TruthTable::print_single_row() const {
 
 
 
-//
-// Get the string associated with a truth value
-//
-const char* TruthTable::get_truth_string(bool value) const {
-	return value ? this->true_str.c_str() : this->false_str.c_str();
+
+void TruthTable::print_centered(const std::string& to_print, size_t width) {
+
+	size_t left_margin = 0, right_margin = 0;
+	size_t string_width = to_print.length();
+
+	if (string_width < width) {
+		left_margin = ((width - string_width) / 2);
+		right_margin = width - (string_width + left_margin);
+	}
+
+	printf("%*s%*s%*s",
+		(int) left_margin, "",
+		(int) (string_width), to_print.c_str(),
+		(int) right_margin, ""
+	);
+
 }
 
 
