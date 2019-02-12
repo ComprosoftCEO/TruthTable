@@ -8,7 +8,7 @@
 #include "Parser/truthtable.yy.h"
 
 
-static TruthStatement* parse_statement(const char* input);
+static TruthStatement* parse_statement(const char* input, TruthTable& table);
 
 
 
@@ -22,12 +22,11 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
-
-	TruthStatement* stmt = parse_statement(argv[1]);
+	TruthTable table;
+	TruthStatement* stmt = parse_statement(argv[1], table);
 	if (!stmt) {return 1;}
 
-	TruthTable table;
-	stmt->build_table(table);
+	stmt->build_table();
 
 	table.print_table();	
 
@@ -40,7 +39,7 @@ int main(int argc, char** argv) {
 //
 // Parse the statement from a string input, returning NULL on failure
 //
-static TruthStatement* parse_statement(const char* input) {
+static TruthStatement* parse_statement(const char* input, TruthTable& table) {
 
 	TruthStatement* stmt = nullptr;
 	yyscan_t scanner;          
@@ -50,7 +49,7 @@ static TruthStatement* parse_statement(const char* input) {
 	yylex_init(&scanner);
 	buf = yy_scan_string(input,scanner);
 	
-	int result = yyparse(scanner,stmt);
+	int result = yyparse(scanner,stmt, table);
 
 	yy_delete_buffer(buf, scanner);
 	yylex_destroy(scanner);

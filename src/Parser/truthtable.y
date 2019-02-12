@@ -3,7 +3,7 @@
 
 %parse-param { yyscan_t scanner } 
 %lex-param {yyscan_t scanner}
-%parse-param {TruthStatement*& statement}
+%parse-param {TruthStatement*& statement} {TruthTable& table}
 
 %code top {
 	#include <cstdio>
@@ -23,7 +23,7 @@
 
 %code {
 	int yylex(YYSTYPE* yylvalp, YYLTYPE* yyllocp, yyscan_t scanner);
-	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& statement, const char* msg);
+	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& statement, TruthTable& table, const char* msg);
 }
 
 %union {
@@ -54,30 +54,30 @@
 code: statement							{statement = $1;}
 
 statement
-	:	IDENTIFIER						{$$ = new IdentifierStatement(*$1); delete($1);}
-	|	LITERAL							{$$ = new LiteralStatement($1);}
+	:	IDENTIFIER						{$$ = new IdentifierStatement(table,*$1); delete($1);}
+	|	LITERAL							{$$ = new LiteralStatement(table,$1);}
 	|	unary_statement					{$$ = $1;}
 	|	binary_statement				{$$ = $1;}
 	|	'(' statement ')'				{$$ = $2;}
 	|	'[' statement ']'				{$$ = $2;}
 
 unary_statement
-	:	NOT	statement	{$$ = new UnaryStatement($1,$2);}
+	:	NOT	statement					{$$ = new UnaryStatement(table,$1,$2);}
 
 binary_statement
-	:	statement AND statement			{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement OR  statement			{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement XOR statement			{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement IMPLIES statement		{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement IFF statement			{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement EQUAL statement		{$$ = new BinaryStatement($1,$2,$3);}
-	|	statement NOT_EQUAL statement	{$$ = new BinaryStatement($1,$2,$3);}
+	:	statement AND statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement OR  statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement XOR statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement IMPLIES statement		{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement IFF statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement EQUAL statement		{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement NOT_EQUAL statement	{$$ = new BinaryStatement(table,$1,$2,$3);}
 
 
 %%
 
 
-static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& stmt, const char *msg) {
+static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& stmt, TruthTable& table, const char *msg) {
 	fprintf(stderr, "%s! [Line %d:%d]\n",
 		msg,yyllocp->first_line, yyllocp->first_column);
 }

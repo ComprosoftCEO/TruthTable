@@ -7,9 +7,9 @@ using std::string;
 //
 // Constructor
 //
-LiteralStatement::LiteralStatement(bool value):
-  value(value),
-  table(nullptr) {}
+LiteralStatement::LiteralStatement(TruthTable& table, bool value):
+  TruthStatement(table),
+  value(value) {}
 
 
 
@@ -17,8 +17,7 @@ LiteralStatement::LiteralStatement(bool value):
 //
 // Build table for a literal value
 //
-void LiteralStatement::build_table(TruthTable& table) {
-	this->table = &table;
+void LiteralStatement::build_table() {
 }
 
 
@@ -34,6 +33,6 @@ bool LiteralStatement::evaluate_statement() const {
 // Convert to string
 //
 string LiteralStatement::to_string() const {
-	return this->table->get_truth_string(this->value);
+	return this->table.get_truth_string(this->value);
 }
 

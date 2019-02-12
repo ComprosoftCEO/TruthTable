@@ -6,7 +6,8 @@ using std::string;
 //
 // Constructor
 //
-BinaryStatement::BinaryStatement(TruthStatement* left, BinaryOperator op, TruthStatement* right):
+BinaryStatement::BinaryStatement(TruthTable& table, TruthStatement* left, BinaryOperator op, TruthStatement* right):
+  TruthStatement(table),
   left(left),
   right(right),
   op(op) {}
@@ -26,10 +27,10 @@ BinaryStatement::~BinaryStatement() {
 //
 // Build table for a binary statement
 //
-void BinaryStatement::build_table(TruthTable& table) {
-	this->left->build_table(table);
-	this->right->build_table(table);
-	table.add_column(this);
+void BinaryStatement::build_table() {
+	this->left->build_table();
+	this->right->build_table();
+	this->table.add_column(this);
 }
 
 

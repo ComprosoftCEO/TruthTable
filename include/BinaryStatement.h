@@ -30,10 +30,10 @@ private:
 	BinaryOperator op;
 
 public:
-	BinaryStatement(TruthStatement* left, BinaryOperator op, TruthStatement* right);
+	BinaryStatement(TruthTable& table, TruthStatement* left, BinaryOperator op, TruthStatement* right);
 	virtual ~BinaryStatement();
 
-	virtual void build_table(TruthTable& table);
+	virtual void build_table();
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };

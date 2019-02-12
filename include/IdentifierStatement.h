@@ -11,15 +11,14 @@ class IdentifierStatement: public TruthStatement {
 
 private:
 	std::string name;
-	TruthTable* table;
 
 public:
 
-	IdentifierStatement(const std::string& name);
+	IdentifierStatement(TruthTable& table, const std::string& name);
 
 	const std::string& getName() const;
 
-	virtual void build_table(TruthTable& table);
+	virtual void build_table();
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };

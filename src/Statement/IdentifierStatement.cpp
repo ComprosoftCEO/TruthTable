@@ -7,9 +7,9 @@ using std::string;
 //
 // Constructor
 //
-IdentifierStatement::IdentifierStatement(const std::string& name):
-  name(name),
-  table(nullptr) {}
+IdentifierStatement::IdentifierStatement(TruthTable& table, const std::string& name):
+  TruthStatement(table),
+  name(name) {}
 
 
 
@@ -25,9 +25,8 @@ const std::string& IdentifierStatement::getName() const {
 //
 // Build table for an Identifier statement
 //
-void IdentifierStatement::build_table(TruthTable& table) {
-	table.add_identifier(this->name);
-	this->table = &table;
+void IdentifierStatement::build_table() {
+	this->table.add_identifier(this->name);
 }
 
 
@@ -36,8 +35,7 @@ void IdentifierStatement::build_table(TruthTable& table) {
 // Evaluate the statement
 //
 bool IdentifierStatement::evaluate_statement() const {
-	if (!table) {return false;	/* Should NOT happen */}
-	return this->table->get_identifier_value(this->name);
+	return this->table.get_identifier_value(this->name);
 }
 
 

@@ -6,7 +6,8 @@ using std::string;
 //
 // Constructor
 //
-UnaryStatement::UnaryStatement(UnaryOperator op, TruthStatement* stmt):
+UnaryStatement::UnaryStatement(TruthTable& table, UnaryOperator op, TruthStatement* stmt):
+  TruthStatement(table),
   stmt(stmt),
   op(op) {}
 
@@ -23,9 +24,9 @@ UnaryStatement::~UnaryStatement() {
 //
 // Build table for Unary statement
 //
-void UnaryStatement::build_table(TruthTable& table) {
-	this->stmt->build_table(table);
-	table.add_column(this);
+void UnaryStatement::build_table() {
+	this->stmt->build_table();
+	this->table.add_column(this);
 }
 
 

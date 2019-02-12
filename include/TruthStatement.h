@@ -8,10 +8,14 @@
 
 class TruthStatement {
 
+protected:
+	TruthTable& table;
+
 public:
+	TruthStatement(TruthTable& table);
 	virtual ~TruthStatement() = default;
 
-	virtual void build_table(TruthTable& table) = 0;
+	virtual void build_table() = 0;
 	virtual bool evaluate_statement() const = 0;
 	virtual std::string to_string() const = 0;
 };

@@ -10,12 +10,11 @@ class LiteralStatement: public TruthStatement {
 
 private:
 	bool value;
-	TruthTable* table;
 
 public:
-	LiteralStatement(bool value);
+	LiteralStatement(TruthTable& table, bool value);
 
-	virtual void build_table(TruthTable& table);
+	virtual void build_table();
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };
