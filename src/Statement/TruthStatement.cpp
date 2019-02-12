@@ -1,6 +1,6 @@
 //Truth Statement Implementation
 #include <TruthStatement.h>
-
+using std::string;
 
 
 //
@@ -16,4 +16,14 @@ TruthStatement::TruthStatement(TruthTable& table):
 //
 bool TruthStatement::operator!=(const TruthStatement& other) const {
 	return !(*this == other);
+}
+
+
+
+//
+// Hash operator
+//
+size_t TruthStatement::hash_class() const noexcept {
+	std::hash<string> hasher;
+	return hasher(this->to_string());
 }

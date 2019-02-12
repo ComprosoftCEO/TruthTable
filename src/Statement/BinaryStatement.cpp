@@ -43,7 +43,6 @@ bool BinaryStatement::operator==(const TruthStatement& stmt) const {
 }
 
 
-
 //
 // Build table for a binary statement
 //

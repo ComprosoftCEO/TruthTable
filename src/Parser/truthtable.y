@@ -3,7 +3,7 @@
 
 %parse-param { yyscan_t scanner } 
 %lex-param {yyscan_t scanner}
-%parse-param {TruthStatement*& statement} {TruthTable& table}
+%parse-param {StatementList*& statement_list} {TruthTable& table}
 
 %code top {
 	#include <cstdio>
@@ -25,7 +25,7 @@
 
 %code {
 	int yylex(YYSTYPE* yylvalp, YYLTYPE* yyllocp, yyscan_t scanner);
-	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& statement, TruthTable& table, const char* msg);
+	static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, StatementList*& statement_list, TruthTable& table, const char* msg);
 }
 
 %union {
@@ -48,13 +48,18 @@
 %right <uop> NOT
 
 //Nonterminal Types
+%type <list> statement_list
 %type <stmt> statement
 %type <stmt> unary_statement binary_statement
 
 %%
 
 //Top level function
-code: statement							{statement = $1;}
+truth_table: statement_list				{statement_list = $1;}
+
+statement_list
+	:	statement						{$$ = new StatementList(); $$->add_statement($1);}
+	|	statement_list ',' statement	{$$ = $1; $$->add_statement($3);}
 
 statement
 	:	IDENTIFIER						{$$ = new IdentifierStatement(table,*$1); delete($1);}
@@ -81,7 +86,7 @@ binary_statement
 %%
 
 
-static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, TruthStatement*& stmt, TruthTable& table, const char *msg) {
+static void yyerror(YYLTYPE* yyllocp, yyscan_t unused, StatementList*& stmt, TruthTable& table, const char *msg) {
 	fprintf(stderr, "%s! [Line %d:%d]\n",
 		msg,yyllocp->first_line, yyllocp->first_column);
 }

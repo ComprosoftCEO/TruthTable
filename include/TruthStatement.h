@@ -3,9 +3,10 @@
 #define TRUTH_STATEMENT_HEADER
 
 #include <string>
+#include <ClassHasher.h>
 
 
-class TruthStatement {
+class TruthStatement: public Hashable {
 
 protected:
 	class TruthTable& table;
@@ -17,6 +18,9 @@ public:
 	//Comparison operators
 	virtual bool operator==(const TruthStatement& other) const = 0;
 	bool operator!=(const TruthStatement& other) const;
+
+	//Hash operator
+	std::size_t hash_class() const noexcept;
 
 	//Truth-table functions
 	virtual void build_table(bool allow_duplicate = false) = 0;

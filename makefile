@@ -15,7 +15,8 @@ OBJECTS = \
 	Statement/UnaryOperator.o \
 	Statement/UnaryStatement.o \
 	Statement/BinaryOperator.o \
-	Statement/BinaryStatement.o
+	Statement/BinaryStatement.o \
+	Statement/StatementList.o
 
 
 # Add the source directory

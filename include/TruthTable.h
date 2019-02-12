@@ -10,7 +10,7 @@
 #include <string>
 
 #include <ClassComparer.h>
-
+#include <ClassHasher.h>
 
 
 //Forward declare the class
@@ -31,7 +31,7 @@ private:
 	//List of expressions and how many spaces wide to make them
 	std::vector<const TruthStatement*> all_columns;
 	std::map<const TruthStatement*,size_t> column_width;
-	std::unordered_set<const TruthStatement*, std::hash<const TruthStatement*>, ClassComparer<const TruthStatement*>> unique_columns;
+	std::unordered_set<const TruthStatement*, ClassHasher<const TruthStatement*>, ClassComparer<const TruthStatement*>> unique_columns;
 
 
 public:

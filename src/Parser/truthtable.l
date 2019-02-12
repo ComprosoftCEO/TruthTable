@@ -2,6 +2,7 @@
 	#include <IdentifierStatement.h>
 	#include <UnaryStatement.h>
 	#include <BinaryStatement.h>
+	#include <StatementList.h>
 
 	#include "truthtable.tab.h"
 

@@ -36,7 +36,7 @@ public:
 
 	virtual bool operator==(const TruthStatement& other) const;
 
-	virtual void build_table(bool force = false);
+	virtual void build_table(bool allow_duplicate = false);
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;
 };
