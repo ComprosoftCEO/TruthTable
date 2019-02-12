@@ -17,7 +17,7 @@ sudo apt-get install bison
 
 ## Usage
 TruthTable \<Expression1\> \<Expression2\> ...
-* __Expression__ - The boolean expression to build a truth table for
+* __Expression__ - The boolean expression to build a truth table for. Each instance of \<Expression\> will get its own truth table.
 
 <br/>
 
@@ -39,6 +39,8 @@ For example:
 _Note: Although truth tables normally don't list the same expression twice, using this comma notation overrides this rule
 for the outermost expression. So, it might include `a -> (a&b)` twice, but not `(a&b)` twice._
 
+<br/>
+
 ### Literal Values
 | Value | Symbols |
 |:----- |:------- |
@@ -46,6 +48,8 @@ for the outermost expression. So, it might include `a -> (a&b)` twice, but not `
 | False | False, F, or 1|
 
 _Note:`True` and `False` can be in any case, so `TrUe`, `TRue`, and `TRUE` are all valid._
+
+<br/>
 
 ### All Supported Operators
 
