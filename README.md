@@ -40,16 +40,16 @@ _Note:`True` and `False` can be in any case, so `TrUe`, `TRue`, and `TRUE` are a
 
 ### All Supported Operators
 
-|   Operation    |    Symbol    |  Type  |
-|:-------------- |:------------ |:------:|
-| Not            | ~ or !       | Unary  |
-| Or             | + or \|      | Binary |
-| And            | \&           | Binary |
-| Exclusive Or   | \^           | Binary |
-| Implies        | -\>          | Binary |
-| Not Implies    | ~\> !\> or - | Binary |
-| If and Only If | \<-\>        | Binary |
-| Equals         | =            | Binary |
-| Not Equals     | !=           | Binary | 
+|   Operation    |  Symbol  |  Type  |
+|:-------------- |:-------- |:------:|
+| Not            | ~ or !   | Unary  |
+| Or             | + or \|  | Binary |
+| And            | \&       | Binary |
+| Exclusive Or   | \^       | Binary |
+| Implies        | -\>      | Binary |
+| Not Implies    | ~\> or - | Binary |
+| If and Only If | \<-\>    | Binary |
+| Equals         | =        | Binary |
+| Not Equals     | !=       | Binary | 
 
 _More operators may be added in the future_

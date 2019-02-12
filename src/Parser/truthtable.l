@@ -32,7 +32,7 @@
 [|+]						{yylval->bop = BinaryOperator::OR;			return OR;}
 [\^]						{yylval->bop = BinaryOperator::XOR;			return XOR;}
 ->							{yylval->bop = BinaryOperator::IMPLIES;		return IMPLIES;}
-(~>)|(!>)|-					{yylval->bop = BinaryOperator::NOT_IMPLIES;	return NOT_IMPLIES;}
+(~>)|-						{yylval->bop = BinaryOperator::NOT_IMPLIES;	return NOT_IMPLIES;}
 [<]-[>]						{yylval->bop = BinaryOperator::IFF;			return IFF;}
 =							{yylval->bop = BinaryOperator::EQUAL;		return EQUAL;}
 !=							{yylval->bop = BinaryOperator::NOT_EQUAL;	return NOT_EQUAL;}
