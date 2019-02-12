@@ -1,7 +1,6 @@
 //Literal boolean statement
 #include <LiteralStatement.h>
 #include <TruthTable.h>
-#include <ClassComparer.h>
 #include <typeinfo>		/* For std::bad_cast */
 using std::string;
 

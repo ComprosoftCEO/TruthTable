@@ -31,6 +31,8 @@ private:
 	//List of expressions and how many spaces wide to make them
 	std::vector<const TruthStatement*> all_columns;
 	std::map<const TruthStatement*,size_t> column_width;
+	std::unordered_set<const TruthStatement*, std::hash<const TruthStatement*>, ClassComparer<const TruthStatement*>> unique_columns;
+
 
 public:
 
@@ -38,7 +40,7 @@ public:
 	TruthTable(const std::string& true_str, const std::string& false_str);
 
 	void add_identifier(const std::string& identifier);
-	void add_column(const TruthStatement* statement);
+	void add_column(const TruthStatement* statement, bool allow_duplicate = false);
 	void clear_table();
 
 	bool get_identifier_value(const std::string& identifier) const;

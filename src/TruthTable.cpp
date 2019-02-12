@@ -39,7 +39,16 @@ void TruthTable::add_identifier(const string& identifier) {
 //
 // Add a column to the list
 //
-void TruthTable::add_column(const TruthStatement* statement) {
+void TruthTable::add_column(const TruthStatement* statement, bool allow_duplicate) {
+
+	if (!allow_duplicate) {
+		//Test for duplicate columns
+		if (this->unique_columns.find(statement) != this->unique_columns.end()) {
+			return;
+		}
+	}
+
+	this->unique_columns.insert(statement);
 	this->all_columns.push_back(statement);
 	this->column_width[statement] = max(
 		{true_str.length(), false_str.length(), statement->to_string().length()}
@@ -57,6 +66,7 @@ void TruthTable::clear_table() {
 	this->identifier_value.clear();
 	this->all_columns.clear();
 	this->column_width.clear();
+	this->unique_columns.clear();
 }
 
 
