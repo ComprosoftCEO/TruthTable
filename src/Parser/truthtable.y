@@ -40,7 +40,7 @@
 %token <str> IDENTIFIER
 %token <val> LITERAL
 %left  <bop> EQUAL NOT_EQUAL
-%left  <bop> IMPLIES IFF
+%left  <bop> IMPLIES NOT_IMPLIES IFF
 %left  <bop> AND OR XOR
 %right <uop> NOT
 
@@ -69,6 +69,7 @@ binary_statement
 	|	statement OR  statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
 	|	statement XOR statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
 	|	statement IMPLIES statement		{$$ = new BinaryStatement(table,$1,$2,$3);}
+	|	statement NOT_IMPLIES statement	{$$ = new BinaryStatement(table,$1,$2,$3);}
 	|	statement IFF statement			{$$ = new BinaryStatement(table,$1,$2,$3);}
 	|	statement EQUAL statement		{$$ = new BinaryStatement(table,$1,$2,$3);}
 	|	statement NOT_EQUAL statement	{$$ = new BinaryStatement(table,$1,$2,$3);}

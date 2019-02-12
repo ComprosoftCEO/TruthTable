@@ -11,6 +11,7 @@ enum class BinaryOperator {
 	OR,
 	XOR,
 	IMPLIES,
+	NOT_IMPLIES,
 	IFF,
 	EQUAL,
 	NOT_EQUAL,
