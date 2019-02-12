@@ -18,6 +18,8 @@ public:
 
 	const std::string& getName() const;
 
+	virtual bool operator==(const TruthStatement& other) const;
+
 	virtual void build_table();
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;

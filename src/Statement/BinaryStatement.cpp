@@ -1,5 +1,8 @@
 //Represents a two-part statement (like A or B)
 #include <BinaryStatement.h>
+#include <TruthTable.h>
+#include <ClassComparer.h>
+#include <typeinfo>		/* For std::bad_cast */
 using std::string;
 
 
@@ -20,6 +23,23 @@ BinaryStatement::BinaryStatement(TruthTable& table, TruthStatement* left, Binary
 BinaryStatement::~BinaryStatement() {
 	delete(this->left);
 	delete(this->right);
+}
+
+
+
+//
+// Binary Statement Equality Operator
+//
+bool BinaryStatement::operator==(const TruthStatement& stmt) const {
+	try {
+		const BinaryStatement& other = dynamic_cast<const BinaryStatement&>(stmt);
+
+		ClassComparer<const TruthStatement*> comparer;
+		return (this->op == other.op) && comparer(this->left,other.left) && comparer(this->right,other.right);
+
+	} catch (std::bad_cast ex) {
+		return false;
+	}
 }
 
 

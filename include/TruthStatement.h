@@ -3,18 +3,22 @@
 #define TRUTH_STATEMENT_HEADER
 
 #include <string>
-#include <TruthTable.h>
 
 
 class TruthStatement {
 
 protected:
-	TruthTable& table;
+	class TruthTable& table;
 
 public:
 	TruthStatement(TruthTable& table);
 	virtual ~TruthStatement() = default;
 
+	//Comparison operators
+	virtual bool operator==(const TruthStatement& other) const = 0;
+	bool operator!=(const TruthStatement& other) const;
+
+	//Truth-table functions
 	virtual void build_table() = 0;
 	virtual bool evaluate_statement() const = 0;
 	virtual std::string to_string() const = 0;

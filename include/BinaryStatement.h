@@ -33,6 +33,8 @@ public:
 	BinaryStatement(TruthTable& table, TruthStatement* left, BinaryOperator op, TruthStatement* right);
 	virtual ~BinaryStatement();
 
+	virtual bool operator==(const TruthStatement& other) const;
+
 	virtual void build_table();
 	virtual bool evaluate_statement() const;
 	virtual std::string to_string() const;

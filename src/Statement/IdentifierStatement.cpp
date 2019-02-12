@@ -1,5 +1,7 @@
 //Represents a generic variable name
 #include <IdentifierStatement.h>
+#include <TruthTable.h>
+#include <typeinfo>		/* For std::bad_cast */
 using std::string;
 
 
@@ -20,6 +22,20 @@ const std::string& IdentifierStatement::getName() const {
 	return this->name;
 }
 
+
+
+//
+// Identifier Statement Equality Operator
+//
+bool IdentifierStatement::operator==(const TruthStatement& stmt) const {
+	try {
+		const IdentifierStatement& other = dynamic_cast<const IdentifierStatement&>(stmt);
+		return this->name == other.name;
+
+	} catch (std::bad_cast ex) {
+		return false;
+	}
+}
 
 
 //

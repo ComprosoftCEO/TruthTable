@@ -1,5 +1,8 @@
 //Literal boolean statement
 #include <LiteralStatement.h>
+#include <TruthTable.h>
+#include <ClassComparer.h>
+#include <typeinfo>		/* For std::bad_cast */
 using std::string;
 
 
@@ -27,6 +30,22 @@ void LiteralStatement::build_table() {
 bool LiteralStatement::evaluate_statement() const {
 	return this->value;
 }
+
+
+
+//
+// Literal Statement Equality Operator
+//
+bool LiteralStatement::operator==(const TruthStatement& stmt) const {
+	try {
+		const LiteralStatement& other = dynamic_cast<const LiteralStatement&>(stmt);
+		return (this->value == other.value);
+
+	} catch (std::bad_cast ex) {
+		return false;
+	}
+}
+
 
 
 //

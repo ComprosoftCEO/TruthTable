@@ -1,5 +1,8 @@
 //Represents a unary expression
 #include <UnaryStatement.h>
+#include <TruthTable.h>
+#include <ClassComparer.h>
+#include <typeinfo>		/* For std::bad_cast */
 using std::string;
 
 
@@ -17,6 +20,23 @@ UnaryStatement::UnaryStatement(TruthTable& table, UnaryOperator op, TruthStateme
 //
 UnaryStatement::~UnaryStatement() {
 	delete(this->stmt);
+}
+
+
+
+//
+// Unary Statement Equality Operator
+//
+bool UnaryStatement::operator==(const TruthStatement& stmt) const {
+	try {
+		const UnaryStatement& other = dynamic_cast<const UnaryStatement&>(stmt);
+
+		ClassComparer<const TruthStatement*> comparer;
+		return (this->op == other.op) && comparer(this->stmt,other.stmt);
+
+	} catch (std::bad_cast ex) {
+		return false;
+	}
 }
 
 
