@@ -4,13 +4,18 @@
 
 
 #include <set>
+#include <unordered_set>
 #include <vector>
 #include <map>
 #include <string>
 
+#include <ClassComparer.h>
+
+
 
 //Forward declare the class
 class TruthStatement;
+
 
 
 class TruthTable {
@@ -26,7 +31,6 @@ private:
 	//List of expressions and how many spaces wide to make them
 	std::vector<const TruthStatement*> all_columns;
 	std::map<const TruthStatement*,size_t> column_width;
-
 
 public:
 
