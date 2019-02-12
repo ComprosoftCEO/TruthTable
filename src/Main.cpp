@@ -9,6 +9,8 @@
 #include "Parser/truthtable.yy.h"
 
 
+//Internal Methods
+static bool build_truth_table(const char* input, TruthTable& table, StatementList*& list);
 static StatementList* parse_statement(const char* input, TruthTable& table);
 
 
@@ -19,20 +21,46 @@ static StatementList* parse_statement(const char* input, TruthTable& table);
 int main(int argc, char** argv) {
 
 	if (argc < 2) {
-		printf("Usage: %s <statement>\n",argv[0]);
+		printf("Usage: %s <statement1> <statement2> ...\n",argv[0]);
 		return 0;
 	}
 
-	TruthTable table;
-	StatementList* list = parse_statement(argv[1], table);
-	if (!list) {return 1;}
+
+	TruthTable all_tables[argc-1];
+	StatementList* all_lists[argc-1];
+
+	//Build all of the tables
+	for (int i = 1; i < argc; ++i) {
+		if (!build_truth_table(argv[i], all_tables[i-1], all_lists[i-1])) {
+			//Free the other lists
+			for (int j = i-1; j>=0; --j) {delete(all_lists[j]);}
+			return 1;
+		}
+	}
+
+	//Print all of the tables
+	for (int i = 0; i < (argc-1); ++i) {
+		if (i > 0) {printf("\n");}
+		all_tables[i].print_table();
+		delete(all_lists[i]);
+	}
+
+	return 0;
+}
+
+
+
+//
+// Build a single truth table, but don't print it
+//
+static bool build_truth_table(const char* input, TruthTable& table, StatementList*& list) {
+
+	list = parse_statement(input, table);
+	if (!list) {return false;}
 
 	list->build_table();
 
-	table.print_table();	
-
-	delete(list);
-	return 0;
+	return true;
 }
 
 
