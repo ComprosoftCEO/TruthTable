@@ -16,7 +16,7 @@ sudo apt-get install bison
 <br/>
 
 ## Usage
-TruthTable \<Expression\>
+TruthTable \<Expression1\> \<Expression2\> ...
 * __Expression__ - The boolean expression to build a truth table for
 
 <br/>
@@ -24,11 +24,20 @@ TruthTable \<Expression\>
 ## Expression
 An expression is a series of identifiers or literals connected by operators and parenthesis. For example:
 ```
-[(a&b)->(b|~c)]<->(b!=T)
+[(a&b) -> (b|~c)] <-> (b!=T)
 ```
 Identifiers all start with a letter, followed by 0 or more alphanumeric characters. Literals are either
 `T` or `F` (or any of the variations listed below). Unary operators go before an identifier, and binary
 operators go between an identifier (infix notation).
+
+If you wish to include multiple expressions in a single truth table, each expression should separated by a comma.
+For example:
+```
+(a&b), a->(a&b), [~a<->c]
+```
+
+_Note: Although truth tables normally don't list the same expression twice, using this comma notation overrides this rule
+for the outermost expression. So, it might include `a -> (a&b)` twice, but not `(a&b)` twice._
 
 ### Literal Values
 | Value | Symbols |
