@@ -41,7 +41,7 @@ bool IdentifierStatement::operator==(const TruthStatement& stmt) const {
 //
 // Build table for an Identifier statement
 //
-void IdentifierStatement::build_table() {
+void IdentifierStatement::build_table(bool allow_duplicate) {
 	this->table.add_identifier(this->name);
 }
 

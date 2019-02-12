@@ -19,7 +19,7 @@ LiteralStatement::LiteralStatement(TruthTable& table, bool value):
 //
 // Build table for a literal value
 //
-void LiteralStatement::build_table() {
+void LiteralStatement::build_table(bool allow_duplicate) {
 }
 
 

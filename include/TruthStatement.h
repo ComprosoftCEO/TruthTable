@@ -19,7 +19,7 @@ public:
 	bool operator!=(const TruthStatement& other) const;
 
 	//Truth-table functions
-	virtual void build_table() = 0;
+	virtual void build_table(bool allow_duplicate = false) = 0;
 	virtual bool evaluate_statement() const = 0;
 	virtual std::string to_string() const = 0;
 };

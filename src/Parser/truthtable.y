@@ -14,6 +14,8 @@
 	#include <LiteralStatement.h>
 	#include <UnaryStatement.h>
 	#include <BinaryStatement.h>
+
+	#include <StatementList.h>
 }
 
 %code requires {
@@ -28,13 +30,14 @@
 
 %union {
 	TruthStatement* stmt;	// Statement
+	StatementList* list;	// List
 	std::string* str;		// Identifier name
 	UnaryOperator uop;		// Unary operator
 	BinaryOperator bop;		// Binary Operator
 	bool val;				// Boolean value
 }
 
-%destructor {delete($$);} <str> <stmt>
+%destructor {delete($$);} <str> <stmt> <list>
 
 //Terminal Types
 %token <str> IDENTIFIER

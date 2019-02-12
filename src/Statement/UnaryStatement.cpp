@@ -44,9 +44,9 @@ bool UnaryStatement::operator==(const TruthStatement& stmt) const {
 //
 // Build table for Unary statement
 //
-void UnaryStatement::build_table() {
+void UnaryStatement::build_table(bool allow_duplicate) {
 	this->stmt->build_table();
-	this->table.add_column(this);
+	this->table.add_column(this,allow_duplicate);
 }
 
 

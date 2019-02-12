@@ -47,10 +47,10 @@ bool BinaryStatement::operator==(const TruthStatement& stmt) const {
 //
 // Build table for a binary statement
 //
-void BinaryStatement::build_table() {
+void BinaryStatement::build_table(bool allow_duplicate) {
 	this->left->build_table();
 	this->right->build_table();
-	this->table.add_column(this);
+	this->table.add_column(this,allow_duplicate);
 }
 
 
