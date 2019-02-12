@@ -22,6 +22,7 @@ TruthTable::TruthTable(const string& true_str, const string& false_str):
   false_str(false_str) {}
 
 
+
 //
 // Add an identifier to the list
 //
@@ -45,6 +46,18 @@ void TruthTable::add_column(const TruthStatement* statement) {
 	);
 }
 
+
+
+//
+// Clear everything from the table
+//
+void TruthTable::clear_table() {
+	this->all_identifiers.clear();
+	this->identifier_width.clear();
+	this->identifier_value.clear();
+	this->all_columns.clear();
+	this->column_width.clear();
+}
 
 
 //

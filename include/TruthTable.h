@@ -35,6 +35,7 @@ public:
 
 	void add_identifier(const std::string& identifier);
 	void add_column(const TruthStatement* statement);
+	void clear_table();
 
 	bool get_identifier_value(const std::string& identifier) const;
 	const std::string& get_truth_string(bool value) const;
